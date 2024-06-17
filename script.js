@@ -17,13 +17,18 @@ const collectEmployees = function() {
 
   let dataInput = true
   while (dataInput === true)    {
-  const inputFirstName = prompt(`Input employee first name.`);
-  const inputLastName = prompt(`Input employee last name.`);
-  const inputSalary = prompt(`Input employee salary.`);
+    const inputFirstName = prompt(`Input employee first name.`);
+    const inputLastName = prompt(`Input employee last name.`);
+    const inputSalary = prompt(`Input employee salary.`);
 
-  employeesArray.push(createEmployee(inputFirstName, inputLastName, Number(inputSalary)));
+    if (isNaN(inputSalary)) {
+        alert(`Please enter a valid number for the salary.`);
+        return;
+    }
 
-  dataInput = window.confirm(`Would you like to add another employee?`);
+    employeesArray.push(createEmployee(inputFirstName, inputLastName, Number(inputSalary)));
+
+    dataInput = window.confirm(`Would you like to add another employee?`);
   }
   return employeesArray;
 }
@@ -46,7 +51,18 @@ const displayAverageSalary = function(employeesArray) {
 
     console.log(`Average Salary: ${averageSalary}`)
     return averageSalary;
-  }
+}
+
+// Select a random employee
+const getRandomEmployee = function(employeesArray) {
+    // Select and display a random employee
+
+    const randomEmployeeIndex = Math.floor(Math.random() * employeesArray.length);
+    const randomEmployee = employeesArray[randomEmployeeIndex];
+
+    console.log(`Congratulations to ${randomEmployee.firstName} ${randomEmployee.lastName}, our random drawing winner!`);
+
+};
 
 // Display employee data in an HTML table
 const displayEmployees = function(employeesArray) {
@@ -80,17 +96,6 @@ const displayEmployees = function(employeesArray) {
       newTableRow.append(salaryCell);
   
       employeeTable.append(newTableRow);
-
-      // Display employee table in alphabetical order for lastName
-      employeesArray.sort((a, b) => {
-        if (a.lastName < b.lastName)    {
-            return -1;
-        }
-        if (a.lastName > b.lastName)    {
-            return 1;
-        }
-        return 0;
-      });
     }
   }
 
@@ -103,8 +108,9 @@ const trackEmployeeData = function() {
 
   console.log('==============================');
 
-  //getRandomEmployee(employees);
+  getRandomEmployee(employees);
 
+// Display employee table in alphabetical order for lastName
   employees.sort(function(a,b) {
     if (a.lastName < b.lastName) {
       return -1;

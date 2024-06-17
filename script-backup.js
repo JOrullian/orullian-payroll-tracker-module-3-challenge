@@ -32,20 +32,11 @@ console.log(employees);
 
 // Save employee data in localStorage
 
-const stringifiedEmployeesFirstName = JSON.stringify(employees.firstName)
-const stringifiedEmployeesLastName = JSON.stringify(employees.lastName)
-const stringifiedEmployeesSalary = JSON.stringify(employees.salary)
+const stringifiedEmployees = JSON.stringify(employees)
+
 localStorage.setItem(
-  "Employee First Name",
-  stringifiedEmployeesFirstName
-);
-localStorage.setItem(
-  "Employee Last Name",
-  stringifiedEmployeesLastName
-);
-localStorage.setItem(
-  "Employee Salary",
-  stringifiedEmployeesSalary
+  "Employees",
+  stringifiedEmployees
 );
 
 // Display the average salary
